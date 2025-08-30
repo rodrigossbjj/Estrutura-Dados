@@ -81,6 +81,59 @@ def contaDigito(n):
         return 1
     return 1 + contaDigito(n//10)
 
+# somaDigito
+#   d.retorna a soma dos dígitos de um inteiro
+def somaDigito(n):
+    if n < 10:
+        return n
+    return n%10 + somaDigito(n//10)
+
+# zeraPares
+#   e.retorna um inteiro com os dígitos pares em zero
+def zeraPares(n): 
+    if n < 10:
+        if n%2==0:
+            return 0
+        return n
+    
+    return zeraPares(n//10) * 10 + zeraPares(n%10)
+
+# zeraImpares
+#   f.retorna um inteiro com os dígitos ímpares em zero
+def zeraImpares(n):
+    if n < 10:
+        if n%2==0:
+            return n
+        return 0
+    
+    return zeraImpares(n//10) * 10 + zeraImpares(n%10)
+
+# removePares
+#   g.remove os dígitos pares de um inteiro
+def removePares(n): 
+    if n < 10:
+        if n%2==0:
+            return 0
+        return n
+    
+    if (n%10) % 2 == 0:
+        return removePares(n // 10)
+    else:
+        return removePares(n // 10) * 10 + (n%10)
+
+# removeImpares
+#   h.remove os dígitos ímpares de um inteiro
+def removeImpares(n): 
+    if n < 10:
+        if n%2!=0:
+            return 0
+        return n
+
+    if (n%10) % 2 != 0:
+        return removeImpares(n // 10)
+    else:
+        return removeImpares(n // 10) * 10 + (n%10)
+
 
 # QUESTÃO 6
 # Crie uma função recursiva para verificar se uma string tem mais vogais do que consoantes.
@@ -101,7 +154,7 @@ print(maiorNum([10, 3, 7, 1]))
 
 
 def main():
-    print(contaDigito(965743))
+    print(removeImpares(53465))
 
 
 if __name__ == "__main__":

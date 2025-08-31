@@ -54,7 +54,7 @@ def organizaSeq(aS, pS=[], iS=[]):
         return organizaSeq(aS[1:], pS + [aS[0]], iS)
     return organizaSeq(aS[1:], pS, iS+ [aS[0]])
 
-
+# QUESTÃO 5
 # Escreva as funções recursivas listas a seguir, todas recebem um inteiro e devolvem um inteiro.
 # a.maiorDigito
 #   retorna o maior dígito de um inteiro
@@ -155,13 +155,62 @@ def contaVogais(p, countVogais, countConsoantes):
         return contaVogais(p[1:], countVogais + 1, countConsoantes)
     return contaVogais(p[1:], countVogais, countConsoantes + 1)    
 
-print(maiorNum([10, 3, 7, 1]))
+
+# QUESTÃO 7
+# Implemente o algoritmo de busca binária em um vetor de inteiros ordenado
+def busca_binaria(aS, num, esq=0, direita=None):
+    if direita is None:
+        direita = len(aS) - 1 
+
+    if esq > direita:
+        return -1
+
+    meio = (esq + direita) // 2
+
+    if aS[meio] == num:
+        return meio
+    elif aS[meio] > num: 
+        return busca_binaria(aS, num, esq, meio-1)
+    return busca_binaria(aS, num, meio+1, direita)
+
+# QUESTÃO 8
+# Dados um vetor de inteiros distintos e ordenados de maneira crescente e um inteiro target, 
+# crie um algoritmo recursivo que determine se existem dois inteiros no vetor que a soma seja igual a target.
+def existeSoma(aS, target, esq =0, dir=None):
+    if dir is None:
+        dir = len(aS) - 1
+
+    if esq >= dir:
+        return False 
+
+    soma = aS[esq] + aS[dir]
+
+    if target == soma: 
+        return True
+    elif soma > target:
+        return existeSoma(aS, target, esq, dir-1)    
+    return existeSoma(aS, target, esq+1, dir)
 
 
+# QUESTÃO 9
+# Dado um array S não ordenado de inteiros e um inteiro k, crie um algoritmo recursivo 
+# para reorganizar os elementos de S tal que todos os elementos menores ou iguais a K 
+# apareçam antes do que os elementos maiores.
+def organizaArr(aS, K, esq=0, direita = None):
+    if direita == None:
+        direita = len(aS) -1
+    if esq > direita:
+        return aS 
+
+    if aS[esq] <= K:
+        return organizaArr(aS, K, esq + 1, direita)
+    elif aS[direita] > K:
+        return organizaArr(aS, K, esq, direita - 1)
+    aS[esq], aS[direita] = aS[direita], aS[esq]
+    return organizaArr(aS, K, esq+1, direita-1)
 
 def main():
-    print(inverteNumero(534))
-
+    print(organizaArr([9, 2, 7, 1, 10, 3], 5))
 
 if __name__ == "__main__":
     main()

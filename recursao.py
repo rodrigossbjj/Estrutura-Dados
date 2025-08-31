@@ -134,6 +134,12 @@ def removeImpares(n):
     else:
         return removeImpares(n // 10) * 10 + (n%10)
 
+# inverteNumero
+#   i.inverte os dígitos de um número inteiro
+def inverteNumero(n, r=0):
+    if n == 0:
+        return r
+    return inverteNumero(n // 10, r * 10 + n % 10)
 
 # QUESTÃO 6
 # Crie uma função recursiva para verificar se uma string tem mais vogais do que consoantes.
@@ -154,7 +160,7 @@ print(maiorNum([10, 3, 7, 1]))
 
 
 def main():
-    print(removeImpares(53465))
+    print(inverteNumero(534))
 
 
 if __name__ == "__main__":

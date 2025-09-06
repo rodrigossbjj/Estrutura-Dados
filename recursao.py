@@ -32,7 +32,6 @@
 
 # # QUESTÃO 1
 # Projete um algoritmo recursivo para determinar o maior elemento em uma sequência de inteiros S com n elementos
-
 def maiorNum(s):
     if len(s) == 1:
         return s[0]
@@ -44,7 +43,6 @@ def maiorNum(s):
     
     return maior
     
-
 # QUESTÃO 3
 # Escreva um algoritmo recursivo que organize uma sequência de inteiros de tal forma que os valores pares apareçam antes do que os ímpares.
 def organizaSeq(aS, pS=[], iS=[]):

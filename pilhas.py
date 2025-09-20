@@ -24,3 +24,16 @@ def limpaPilha(s:Stack):
         return "stack vazia"
     s.pop()
     return limpaPilha(s)
+
+# QUESTÃO 5
+# Implemente uma função que inverta a ordem dos elementos de um vetor usando uma pilha
+def inverteVetor(arr):
+    if len(arr) == 0: 
+        return False
+    s = Stack()
+    for i in arr:
+        s.push(i)
+    arr.clear()
+    while not s.isEmpty():
+        arr.append(s.pop())
+    return arr

@@ -115,4 +115,3 @@ class BinTree:
                     visited.add(n)
                     result.append(n.data)
                     n = None
-

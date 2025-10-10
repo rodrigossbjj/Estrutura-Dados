@@ -75,3 +75,69 @@ def verificarNós(r:BinTree):
         return 0
     return 1 + verificarNós(r.left) + verificarNós(r.right)
 
+# Percurso inverso do em nível
+def percusoInverso(r:BinTree):
+    if r is None:
+        return False 
+    q = Queue()
+    q1 = Queue()
+    q.enQueue(r)
+    s = Stack()
+    while not q.isEmpty():
+        n = q.deQueue()
+        q1.enQueue(n)
+        if n.left:
+            q.enQueue(n.left)
+        if n.right:
+            q.enQueue(n.right)
+    while not q1.isEmpty():
+        s.push(q1.deQueue())
+
+    while not s.isEmpty():
+        print(s.pop())
+    return None
+
+# Altura da árvore
+def alturaArvore(r:BinTree):
+    if r is None:
+        return 0
+    q = Queue()
+    q.enQueue(r)
+    count = 0
+    while not q.isEmpty():
+        n = q.len()
+        for _ in range(n):
+            node = q.deQueue()
+            if node.left:
+                q.enQueue(node.left)
+            if node.right:
+                q.enQueue(node.right)
+        count += 1
+    return count
+
+# Maior soma dos niveis
+def alturaArvore(r:BinTree):
+    if r is None:
+        return 0
+    q = Queue()
+    q.enQueue(r)
+    soma = 0
+    mS = 0
+    while not q.isEmpty():
+        n = q.len()
+        for _ in range(n):
+            node = q.deQueue()
+            if node.left:
+                q.enQueue(node.left)
+            if node.right:
+                q.enQueue(node.right)
+            soma += n.data 
+        if soma > mS:
+            mS = soma
+    return mS
+
+def main():
+    b = buildRandomTree()
+
+if __name__ == "__main__":
+    main()

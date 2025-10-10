@@ -29,3 +29,49 @@ def max_value(root:BinTree):
     if root is None:
         return float('-inf')
     return max(root.data, max_value(root.left), max(max_value(root.right)))
+
+
+# Verificar se existe um valor na árvore
+def verificar(r:BinTree, data):
+    if r is None:
+        return False
+    if r.value == data:
+        return True
+    return verificar(r.left, data) or verificar(r.right, data)
+
+def verificarInterativo(r:BinTree, data):
+    if r is None:
+        return False 
+    q = Queue()
+    q.enQueue(r)
+    while not q.isEmpty():
+        n = q.deQueue()
+        if n == data:
+            return True
+        if n.left:
+            q.enQueue(n.left)
+        if n.right:
+            q.enQueue(n.right)
+    return False
+
+# Quantidade de nós
+def verificarNósInterativo(r:BinTree):
+    if r is None:
+        return False 
+    s = Stack()
+    s.push(r)
+    count = 0
+    while not s.isEmpty():
+        n = s.pop()
+        count += 1
+        if n.left:
+            s.push(n.left)
+        if n.right:
+            s.push(n.right)
+    return count
+
+def verificarNós(r:BinTree):
+    if r is None:
+        return 0
+    return 1 + verificarNós(r.left) + verificarNós(r.right)
+

@@ -91,3 +91,116 @@ class QueueTwoStacks:
             print("Fila vazia")
             return None
         return self.S1.pop()
+
+# QUESTÃO 6
+# Implemente um deque através de duas pilhas. 
+# Não crie variáveis, use apenas as operações das pilhas e não use recursão.
+class Deque:
+    def __init__(self, capacity):
+        self.frontStack = Stack(capacity)
+        self.backStack = Stack(capacity)
+
+    def push_front(self, data):
+        # Inserir na frente → empilha direto em frontStack
+        self.frontStack.push(data)
+
+    def push_back(self, data):
+        # Inserir no fim → empilha direto em backStack
+        self.backStack.push(data)
+
+    def pop_front(self):
+        # Se frontStack está vazio, move tudo de backStack pra frontStack
+        if self.frontStack.isEmpty():
+            while not self.backStack.isEmpty():
+                self.frontStack.push(self.backStack.pop())
+
+        if self.frontStack.isEmpty():
+            print("Deque Underflow (vazio na frente)")
+            return None
+        return self.frontStack.pop()
+
+    def pop_back(self):
+        # Se backStack está vazio, move tudo de frontStack pra backStack
+        if self.backStack.isEmpty():
+            while not self.frontStack.isEmpty():
+                self.backStack.push(self.frontStack.pop())
+
+        if self.backStack.isEmpty():
+            print("Deque Underflow (vazio atrás)")
+            return None
+        return self.backStack.pop()
+
+    def peek_front(self):
+        # Garante que o elemento da frente esteja em frontStack
+        if self.frontStack.isEmpty():
+            while not self.backStack.isEmpty():
+                self.frontStack.push(self.backStack.pop())
+
+        if self.frontStack.isEmpty():
+            print("Deque vazio (peek_front)")
+            return None
+        return self.frontStack.peek()
+
+    def peek_back(self):
+        # Garante que o elemento de trás esteja em backStack
+        if self.backStack.isEmpty():
+            while not self.frontStack.isEmpty():
+                self.backStack.push(self.frontStack.pop())
+
+        if self.backStack.isEmpty():
+            print("Deque vazio (peek_back)")
+            return None
+        return self.backStack.peek()
+
+    def isEmpty(self):
+        return self.frontStack.isEmpty() and self.backStack.isEmpty()
+
+# QUESTÃO 7
+# Implemente uma pilha usando filas.
+class StackUsingQueues:
+    def __init__(self, limit=5):
+        self.q1 = Queue(limit)
+        self.q2 = Queue(limit)
+        self.limit = limit
+
+    def push(self, item):
+        self.q2.enQueue(item)
+
+        while not self.q1.isEmpty():
+            self.q2.enQueue(self.q1.deQueue())
+
+        self.q1, self.q2 = self.q2, self.q1
+
+    def pop(self):
+        if self.q1.isEmpty():
+            print("Stack Underflow")
+            return None
+        return self.q1.deQueue()
+
+    def peek(self):
+        if self.q1.isEmpty():
+            print("Stack vazia")
+            return None
+        return self.q1.que[self.q1.front] 
+
+    def isEmpty(self):
+        return self.q1.isEmpty()
+
+    def size(self):
+        return self.q1.size
+
+# QUESTÃO 8
+# Inverta os primeiros k elementos de uma fila.
+def inverterKEl(q:Queue, k):
+    if q.isEmpty():
+        return None 
+    s = Stack()
+
+    for i in range(k):
+        s.push(q.deQueue())
+    
+    while not s.isEmpty():
+        q.enQueue(s.pop())
+    
+    for i in range(q.size - k):
+        q.enQueue(q.deQueue())

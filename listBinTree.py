@@ -137,7 +137,9 @@ def alturaArvore(r:BinTree):
     return mS
 
 def main():
-    b = buildRandomTree()
+    bt, root = buildRandomTree(10, 7)
+    print("\nRaiz:", root.data)
+    bt.morris_inorder_traversal(root)
 
 if __name__ == "__main__":
     main()

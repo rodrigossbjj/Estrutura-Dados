@@ -115,3 +115,23 @@ class BinTree:
                     visited.add(n)
                     result.append(n.data)
                     n = None
+
+    def morris_inorder_traversal(root):
+      current = root 
+      while current:
+        if not current.left:
+            print(current.data, end = " ")
+            current = current.right 
+        else:
+            predecessor = current.left 
+            while predecessor.right and predecessor.right != current:
+                predecessor = predecessor.right 
+            
+            if not predecessor.right:
+                predecessor.right = current 
+                current = current.left 
+            else:
+                predecessor.right = None
+                print(current.data, end=" ")
+                current = current.right
+

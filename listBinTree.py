@@ -116,7 +116,7 @@ def alturaArvore(r:BinTree):
     return count
 
 # Maior soma dos niveis
-def alturaArvore(r:BinTree):
+def maxSomaNiveis(r:BinTree):
     if r is None:
         return 0
     q = Queue()
@@ -135,6 +135,46 @@ def alturaArvore(r:BinTree):
         if soma > mS:
             mS = soma
     return mS
+
+def maxSomaNiveis(root, nivel=0, somas=None):
+    if root is None:
+        return 0 if somas is None else max(somas)
+    if somas is None:
+        somas = []
+
+    if len(somas) <= nivel:
+        somas.append(root.data)
+    else:
+        somas[nivel] += root.data
+    maxSomaNiveis(root.left, nivel + 1, somas)
+    maxSomaNiveis(root.right, nivel + 1, somas)
+
+    return max(somas)
+    
+
+# A soma do conteúdo de todos os nós de uma árvore binária
+def somaNos(r:BinTree):
+    if r is None:
+        return 0
+    q = Queue()
+    q.enQueue(r)
+    while not q.isEmpty():
+        soma = 0
+        n = q.len()
+        for _ in range(n):
+            node = q.deQueue()
+            if node.left:
+                q.enQueue(node.left)
+            if node.right:
+                q.enQueue(node.right)
+            soma += n.data 
+        mS += soma
+    return mS
+
+def somaNos(r:BinTree):
+    if r is None: 
+        return 0
+    return somaNos(r.left) + somaNos(r.right)
 
 def main():
     bt, root = buildRandomTree(10, 7)

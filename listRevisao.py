@@ -21,3 +21,4 @@ def verificaFechamento(f):
                 return False
             
     return s.isEmpty()
+

@@ -202,6 +202,32 @@ def somaNos(r:BinTree):
         return 0
     return r.data + somaNos(r.left) + somaNos(r.right)
 
+# Árvore Própria
+def arvorePropria(r):
+    if r is None:
+        return True 
+    if (r.left is None) != (r.right is None):  
+        return False
+    return arvorePropria(r.left) and arvorePropria(r.right)
+
+# Árvore Cheia
+def arvorePerfeita(root, nivel=0, altura=None):
+    if root is None:
+        return True
+    if altura is None:
+        altura = 0
+        n = root
+        while n.left:
+            altura += 1
+            n = n.left
+    if root.left is None and root.right is None:
+        return nivel == altura
+    if root.left is None or root.right is None:
+        return False
+    return (arvorePerfeita(root.left, nivel + 1, altura) and
+            arvorePerfeita(root.right, nivel + 1, altura))
+
+
 def main():
     bt, root = buildRandomTree(10, 7)
     print("\nRaiz:", root.data)

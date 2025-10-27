@@ -115,6 +115,35 @@ def alturaArvore(r:BinTree):
         count += 1
     return count
 
+def alturaArvore(r:BinTree):
+    if r is None:
+        return 0
+    return 1 + max(alturaArvore(r.left), alturaArvore(r.right))
+
+
+# A profundidade de uma árvore binária
+def profundidadeArvore(r:BinTree):
+    if r is None:
+        return 0
+    q = Queue()
+    q.enQueue(r)
+    count = 0
+    while not q.isEmpty():
+        n = q.len()
+        for _ in range(n):
+            node = q.deQueue()
+            if node.left:
+                q.enQueue(node.left)
+            if node.right:
+                q.enQueue(node.right)
+        count += 1
+    return count
+
+def profundidadeArvore(r: BinTree):
+    if r is None:
+        return 0
+    return 1 + max(profundidadeArvore(r.left), profundidadeArvore(r.right))
+
 # Maior soma dos niveis
 def maxSomaNiveis(r:BinTree):
     if r is None:
@@ -158,23 +187,20 @@ def somaNos(r:BinTree):
         return 0
     q = Queue()
     q.enQueue(r)
+    soma = 0
     while not q.isEmpty():
-        soma = 0
-        n = q.len()
-        for _ in range(n):
-            node = q.deQueue()
-            if node.left:
-                q.enQueue(node.left)
-            if node.right:
-                q.enQueue(node.right)
-            soma += n.data 
-        mS += soma
-    return mS
+        node = q.deQueue()
+        if node.left:
+            q.enQueue(node.left)
+        if node.right:
+            q.enQueue(node.right)
+        soma += node.data 
+    return soma
 
 def somaNos(r:BinTree):
     if r is None: 
         return 0
-    return somaNos(r.left) + somaNos(r.right)
+    return r.data + somaNos(r.left) + somaNos(r.right)
 
 def main():
     bt, root = buildRandomTree(10, 7)

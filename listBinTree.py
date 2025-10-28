@@ -211,7 +211,7 @@ def arvorePropria(r):
     return arvorePropria(r.left) and arvorePropria(r.right)
 
 # Árvore Cheia
-def arvorePerfeita(root, nivel=0, altura=None):
+def arvoreCheia(root, nivel=0, altura=None):
     if root is None:
         return True
     if altura is None:
@@ -224,8 +224,30 @@ def arvorePerfeita(root, nivel=0, altura=None):
         return nivel == altura
     if root.left is None or root.right is None:
         return False
-    return (arvorePerfeita(root.left, nivel + 1, altura) and
-            arvorePerfeita(root.right, nivel + 1, altura))
+    return (arvoreCheia(root.left, nivel + 1, altura) and
+            arvoreCheia(root.right, nivel + 1, altura))
+# Árvore Completa
+def arvoreCompleta(r:BinTree):
+    if r is None:
+        return True
+    q = Queue()
+    q.enQueue(r)
+    flag = False  
+    while not q.isEmpty():
+        node = q.deQueue()
+        if node.left:
+            if flag: 
+                return False
+            q.enQueue(node.left)
+        else:
+            flag = True
+        if node.right:
+            if flag: 
+                return False
+            q.enQueue(node.right)
+        else:
+            flag = True
+    return True
 
 
 def main():
